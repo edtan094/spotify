@@ -2,7 +2,7 @@ const SPOTIFY_ENDPOINT = `https://accounts.spotify.com/api/token`;
 
 export async function getAccessToken() {
   const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
-  const response = fetch(SPOTIFY_ENDPOINT, {
+  const response = await fetch(SPOTIFY_ENDPOINT, {
     method: "POST",
     headers: {
       Authorization: `Basic ${Buffer.from(
@@ -15,4 +15,6 @@ export async function getAccessToken() {
       refresh_token,
     }),
   });
+
+  return response.json();
 }
